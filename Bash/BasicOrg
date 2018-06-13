@@ -1,5 +1,4 @@
-#!/bin/bash
-#SCRIPTPATH="dirname $SCRIPT"
+
 a=1
 for i in *; do
 	new=$(printf "%04d.file" "$a")
