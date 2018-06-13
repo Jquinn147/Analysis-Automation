@@ -1,0 +1,31 @@
+#!/bin/bash
+a=1
+b=1
+
+
+for i in *; do
+	new=$(printf "%04d.file" "$b")
+	mv -i -- "$i" "$new"
+	let b=b+1
+
+done
+
+var=$(grep -rnwl $PWD -e UPX)
+echo "$var"
+for word in $var
+do
+	echo $word
+	upx -d "$word"
+	touch $PWD "UPXFiles.txt" 
+	echo "$word" >> UPXFiles.txt
+done
+
+
+for i in ./*.file; do
+	mkdir "$(printf "%04d" "$a")"
+	var="$(printf "%04d" "$a")"
+	echo "$var"
+	mv "$var.file" "$var/"
+	let a=a+1
+done	
+

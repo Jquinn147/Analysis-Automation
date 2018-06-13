@@ -1,0 +1,31 @@
+#!/bin/bash
+#SCRIPTPATH="dirname $SCRIPT"
+a=1
+for i in *; do
+	new=$(printf "%04d.file" "$a")
+	mv -i -- "$i" "$new"
+	let a=a+1
+done
+#Rename all the files in the directory
+count=$( ls -1 | wc -l )
+echo $count
+sizeW="5267459"
+mkdir WannaCrypt
+mkdir Other
+a=1
+for i in *; do
+	new=$(printf "%04d.file" "$a")
+	filesize=$(ls -ltr $new | cut -c 24-30)
+	echo $filesize
+	if [ "$filesize" -eq "$sizeW" ]
+	then
+		echo "$new is WannaCrypt"
+		mv $new WannaCrypt/	
+	else
+		echo "$new is Other"
+		mv $new Other/
+	fi
+	
+	
+	let a=a+1
+done
