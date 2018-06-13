@@ -1,0 +1,5 @@
+#!/bin/bash
+for d in [0-9][0-9][0-9][0-9]
+do 
+	( cd $d && strings *.file > strings && file *.file > file && md5sum *.file > md5)
+done
