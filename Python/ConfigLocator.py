@@ -25,13 +25,6 @@ def readString(myFile,out,counted):
 			#flag +=1
 			
 			counted = counter
-			x1 = counter - 2
-			#print(x1)
-			#print(chars[x1])
-			#if chars[x1] != chr(0):
-				#print(counter)
-				#counted = counter
-				#out = "".join(chars)
 			flag = 1
 			#print(d)
 			return(d)
