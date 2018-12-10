@@ -1,6 +1,7 @@
 import os
 import struct
 import re
+from collections import OrderedDict
 
 def readString(myFile,out,counted):
 	chars = []
@@ -11,6 +12,7 @@ def readString(myFile,out,counted):
 	outs = []
 	outlist = []
 	d = []
+	ix = 0
 	#o2f = open('stringsO.txt', 'wb')
 	t = True
 	
@@ -65,14 +67,17 @@ def readString(myFile,out,counted):
 		
 		#print(chars)
 		#print(outlist)
-		d = list(set(outlist))
+		
+			 
+		d = list(outlist)
 		#print(d)
+		
 		#print("Hit")
 		if len(chars) > 0 and c == chr(0):
 			str1 = ''.join(chars)
-			str2 = str1 + " "			
-			#print(str2)
-			outlist.append(str2)
+			#print(str1)			
+			#print(str1)
+			outlist.append(str1)
 			
 		c1 += 1
 		counter +=1
@@ -163,30 +168,53 @@ with open('outfile.txt', 'rb') as g: #Read Config Buffer
 	#print(aint)
 	a = readString(g, out, it)
 	b = len(a)
+	c =list(OrderedDict.fromkeys(a))
+	#print(a)
+	#print(c)
 	#b = readString(g, out, it)
 	#print(b)
 	#print(it)
 	#print(out)
-	#print(a)
-	enIp = decryptString(a[b-2])
-	#print(enIp)
-	#print(x)
 	
-	Port = str(a[b-4])	
-	EA1 = str(a[b-5])
+	deIp = decryptString(c[0])
+	Port = bytearray(c[1])	
+	EA1 = str(c[2])
 	DA1 = decryptString(EA1)
-	EA2 = str(a[5])
-	#print(EA2)
+	EA2 = str(c[3])
 	DA2 = decryptString(EA2)
-	SName = str(a[b-1])
-	DName = str(a[7])
-	AFhash = str(a[0])
-	ELoc = str(a[2])
-	ExName = str(a[b-3])
-	EName = str(a[8])
-	extra = str(a[9])
-	print 'Encrypted Ip: ' + str(a[b-2])
-	print 'Decrypted Ip: ' + enIp	
+	SName = str(c[4])
+	DName = str(c[5])
+	AFhash = str(c[7])
+	ELoc = str(c[9])
+	ExName = str(c[10])
+	EName = str(c[12])
+	extra = str(c[6])
+	u1 = str(c[8])
+	u2 = str(c[11])
+	u3 = str(c[13])
+	u4 = str(c[14])
+	of2 = open("config", "wb")
+	of2.write('Encrypted Ip: ' + str(c[0]) + "\n")
+	of2.write('Decrypted Ip: ' + deIp + "\n")
+	of2.write('Port(Reverse hex): ' + Port + "\n")
+	of2.write('Encrypted Args(1): ' + EA1 + "\n")
+	of2.write('Decrypted Args(1): ' + DA1 + "\n")
+	of2.write('Encrypted Args(2): ' + EA2 + "\n")
+	of2.write('Decrypted Args(2): ' + DA2 + "\n")
+	of2.write('Service Name: ' + SName + "\n")
+	of2.write('Display Name: ' + DName + "\n")
+	of2.write('Affiliate Hash: ' + AFhash + "\n")
+	of2.write('Executable Location: ' + ELoc + "\n")
+	of2.write('Executable Name: ' + ExName + "\n")
+	of2.write('Event Name: ' + EName + "\n")
+	of2.write('Extra Data: ' + extra + "\n")
+	of2.write('Unknown int 1: ' + u1 + "\n")
+	of2.write('Unknown int 2: ' + u2 + "\n")
+	of2.write('Unknown int 3: ' + u3 + "\n")
+	of2.write('Unknown int 4: ' + u4 + "\n") 
+	of2.close()
+	print 'Encrypted Ip: ' + str(c[0])
+	print 'Decrypted Ip: ' + deIp	
 	print 'Port(Reverse hex): ' + Port 
 	print 'Encrypted Args(1): ' + EA1
 	print 'Decrypted Args(1): ' + DA1
@@ -199,6 +227,10 @@ with open('outfile.txt', 'rb') as g: #Read Config Buffer
 	print 'Executable Name: ' + ExName
 	print 'Event Name: ' + EName
 	print 'Extra Data: ' + extra
+	print 'Unknown int 1: ' + u1
+	print 'Unknown int 2: ' + u2
+	print 'Unknown int 3: ' + u3
+	print 'Unknown int 4: ' + u4
 	
 	
 
