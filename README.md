@@ -19,3 +19,8 @@ These 2 python scripts work together to scrape any dropped 'exe' files from a sa
 Wrapper.py - Identifies the file offset of all exe's in the sample, using the DOS file header.  Saves these offsets into a file called 'output'.
 
 Chunking.py - Steps through the file and scrapes out each exe.  Saves into "Dropped".
+
+# Config Dumper / Encrypted String Decryptor
+This is a python script that dumps the worm ZombieBoy's config file.  There's also a script to decrypt the Encrypted strings, however, that script is in its early stages and requires manually copy and pasting any encrypted data.
+
+
