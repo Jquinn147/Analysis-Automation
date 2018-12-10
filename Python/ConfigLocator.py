@@ -12,7 +12,7 @@ with open(filename, 'rb') as f:
 	tSize = eConfigBuffer - sConfigBuffer
 	print(tSize)
 	buf = buffer(s,sConfigBuffer,tSize)
-	print(buf)
+	#print(buf)
 	of = open('outfile.txt', 'wb')
 	of.write(buf)
 	of.close()
