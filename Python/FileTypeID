@@ -1,0 +1,234 @@
+import os
+import struct
+import re
+from collections import OrderedDict
+
+
+	#return sOffset
+def findSigs(fileInput):
+	it0 = 0
+	sOffset = -1
+	
+	#ani=b'\x52\x49\x46\x46'
+	#au=b'\x2E\x73\x6E\x64'
+	#bmp0=b'\x42\x4D\xF8\xA9'
+	#bmp1=b'\x42\x4D\x62\x25'
+	#bmp2=b'\x42\x4D\x76\x03'
+	#cab=b'\x4D\x53\x43\x46'
+	#dll=b'\x4D\x5A\x90\x00'
+	#Excel=b'\xD0\xCF\x11\xE0'
+	#exe0=b'\x4D\x5A\x50\x00'
+	#exe1=b'\x4D\x5A\x90\x00'
+	#flv=b'\x46\x4C\x56\x01'
+	#gif0=b'\x47\x49\x46\x38\x39\x61'
+	#gif1=b'\x47\x49\x46\x38\x37\x61'
+	#gz=b'\x1F\x8B\x08\x08'b'\x49\x44\x33\x2E'
+	#ico=b'\x00\x00\x01\x00'
+	#jpeg0=b'\xFF\xD8\xFF\xE1'
+	#jpeg1=b'\xFF\xD8\xFF\xE0'
+	#jpeg2=b'\xFF\xD8\xFF\xFE'
+	#LinuxBin=b'\x7F\x45\x4C\x46'
+	#png=b'\x89\x50\x4E\x47'
+	#msi=b'\xD0\xCF\x11\xE0'
+	#mp30=b'\x49\x44\x33\x2E'
+	#mp31=b'\x49\x44\x33\x03'
+	#oft=b'\x4F\x46\x54\x32'
+	#ppt=b'\xD0\xCF\x11\xE0'
+	#pdf=b'\x25\x50\x44\x46'
+	#rar=b'\x52\x61\x72\x21'
+	#sfw=b'\x43\x57\x53\x06'
+	#sfw0=b'\x43\x57\x53\x08'
+	#tar=b'\x1F\x8B\x08\x00'
+	#tgz=b'\x1F\x9D\x90\x70'
+	#word=b'\xD0\xCF\x11\xE0'
+	#wmv=b'\x30\x26\xB2\x75'	
+	#zip1=b'\x50\x4B\x03\x04'
+	
+	while True:
+			sOffset = s.find(b'\x52\x49\x46\x46', sOffset+1)
+			print 'Ani file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x2E\x73\x6E\x64', sOffset+1)
+			print 'Au file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x42\x4D\xF8\xA9', sOffset+1)
+			print 'bmp file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x42\x4D\x62\x25', sOffset+1)
+			print 'bmp file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x42\x4D\x76\x03', sOffset+1)
+			print 'bmp file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x4D\x53\x43\x46', sOffset+1)
+			print 'cab file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x4D\x5A\x90\x00', sOffset+1)
+			print 'dll file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\xD0\xCF\x11\xE0', sOffset+1)
+			print 'Excel file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x4D\x5A\x50\x00', sOffset+1)
+			print 'exe file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x4D\x5A\x90\x00', sOffset+1)
+			print 'exe file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x46\x4C\x56\x01', sOffset+1)
+			print 'flv file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x47\x49\x46\x38\x39\x61', sOffset+1)
+			print 'gif file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x47\x49\x46\x38\x37\x61', sOffset+1)
+			print 'gif file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x1F\x8B\x08\x08', sOffset+1)
+			print 'gz file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x00\x00\x01\x00', sOffset+1)
+			print 'ico file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\xFF\xD8\xFF\xE1', sOffset+1)
+			print 'jpeg file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\xFF\xD8\xFF\xE0', sOffset+1)
+			print 'jpeg file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\xFF\xD8\xFF\xFE', sOffset+1)
+			print 'jpeg file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x7F\x45\x4C\x46', sOffset+1)
+			print 'Linux Bin file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x89\x50\x4E\x47', sOffset+1)
+			print 'png file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\xD0\xCF\x11\xE0', sOffset+1)
+			print 'msi file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x49\x44\x33\x2E', sOffset+1)
+			print 'mp3 file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x49\x44\x33\x03', sOffset+1) ##oft=b'\x4F\x46\x54\x32'
+	#ppt=b'\xD0\xCF\x11\xE0'
+	#pdf=b'\x25\x50\x44\x46'
+	#rar=b'\x52\x61\x72\x21'
+	#sfw=b'\x43\x57\x53\x06'
+	
+			print 'mp3 file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x4F\x46\x54\x32', sOffset+1)
+			print 'oft file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\xD0\xCF\x11\xE0', sOffset+1)
+			print 'ppt file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x25\x50\x44\x46', sOffset+1)
+			print 'pdf file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x52\x61\x72\x21', sOffset+1)
+			print 'rar file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x43\x57\x53\x06', sOffset+1)
+			print 'sfw file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x43\x57\x53\x08', sOffset+1)#sfw0=b'\x43\x57\x53\x08'
+	#tar=b'\x1F\x8B\x08\x00'
+	#tgz=b'\x1F\x9D\x90\x70'
+	#word=b'\xD0\xCF\x11\xE0'
+	#wmv=b'\x30\x26\xB2\x75'	
+	#zip1=b'\x50\x4B\x03\x04'
+			print 'sfw file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x1F\x8B\x08\x00', sOffset+1)
+			print 'tar file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x1F\x9D\x90\x70', sOffset+1)
+			print 'tgz file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\xD0\xCF\x11\xE0', sOffset+1)
+			print 'word file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x30\x26\xB2\x75', sOffset+1)
+			print 'wmv file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	while True:
+			sOffset = s.find(b'\x50\x4B\x03\x04', sOffset+1)
+			print 'Zip file at: ' + str(sOffset)
+			if sOffset == -1:
+				break
+	
+	
+	
+	it0 += 1
+filename = input("Please enter the filename: --> ")
+with open(filename, 'rb') as f:
+	s = f.read()
+	a = findSigs(s)
