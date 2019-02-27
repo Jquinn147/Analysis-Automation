@@ -1,5 +1,5 @@
 import os
-DropPath = "Dropped/"
+DropPath = "Dropped"
 if not os.path.exists(DropPath):
    os.makedirs(DropPath)
 def read_in_chunks(infile, chunk_size): #Chunking Function
@@ -36,23 +36,27 @@ for i in range(0,40):
 	    int3 = int1 - int0
 
 	    t = buffer(s,int0,int3)
-	
-	    outfile = open("%s/%d.file" % i DropPath,  'wb')
-	    
+	    ofile = ("%s/%d.file" % (DropPath,i))
+	    print (ofile)
+	    outfile = open("%s.file" % ofile, 'wb' )
 	    outfile.write(t)
 	    outfile.close()
 	    
 	except ValueError: #End of file exception handler
 	    int4 = sizeOfFile - int0
 	    t = buffer(s,int0,int4)
-	    outfile = open("%s/%d.file" % i,DropPath 'wb')
+	    ofile = ("%s/%d.file" % (DropPath,i))
+	    print (ofile)
+	    outfile = open("%s.file" % ofile, 'wb' )
 	    outfile.write(t)
 	    outfile.close()
 	    
 	except IndexError:
 	   int4 = sizeOfFile - int0
 	   t = buffer(s,int0,int4)
-	   outfile = open("%s/%d.file" % i,DropPath 'wb')
+	   ofile = ("%s/%d.file" % (DropPath,i))
+	   print (ofile)
+	   outfile = open("%s.file" % ofile, 'wb' )
 	   outfile.write(t)
 	   outfile.close()
            
