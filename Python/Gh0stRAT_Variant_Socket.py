@@ -14,6 +14,7 @@ port = 7721
 print (host)
 print (port)
 serversocket.bind((host, port))
+filename = input("Please enter in the output filename: --> ")
 #output = open('PacketCapture', 'a+b')
 
 def Decrypt(packet):
@@ -48,6 +49,17 @@ def Decrypt(packet):
 
     return output		
 
+
+def OpcodeParse(Opcode):
+    if (Opcode == "0x65"):
+        print("Implant_Heartbeat")
+        return 1
+    elif (Opcode == "0x66"):
+        print("Implant_Login")
+        return 1
+    else:
+        print("Unknown Opcode")
+        return 0
 class client(Thread):
     def __init__(self, socket, address):
         Thread.__init__(self)
@@ -57,37 +69,42 @@ class client(Thread):
 
     def run(self):
         pkt =''
-        with open ('PacketCapture','wb') as output:
-            while 1:
-                pkt = self.sock.recv(1024)
-	   	   
+        divider = "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n"
+        while 1:
+            pkt = self.sock.recv(1024)
+            output = open(filename, "a+b")   
             	
-                if (pkt.find(b'\xEA\xEE\xCC\xD3\xB8') != -1):
-                    print ("[+] Received Gh0stRAT variant")
+            if (pkt.find(b'\xEA\xEE\xCC\xD3\xB8') != -1):
+                print ("[+] Received Gh0stRAT variant")
 			
-                    buf = list(pkt)
+                buf = list(pkt)
                     #print(buf)
-                    test = Decrypt(buf)
-                    print("[+] Decrypted Gh0stRAT packet(compressed) ")
-                    print(test)
-                    bStart = test.find('789c')
-                    #print(bStart)
-                    bSize = len(test) - bStart
+                test = Decrypt(buf)
+                print("[+] Decrypted Gh0stRAT packet(compressed) ")
+                print(test)
+                bStart = test.find('789c')
+                #print(bStart)
+                bSize = len(test) - bStart
                    
-                    b2 = bytearray.fromhex(test[bStart:])
+                b2 = bytearray.fromhex(test[bStart:])
                     
-                    decompress = zlib.decompress(b2)
-                    print("[+] Zlib decompressed buffer")
-                    print(decompress)
-                    b3 = decompress[0]
-                    print("[+] Extracted Opcode")
-                    print(hex(b3))
+                decompress = zlib.decompress(b2)
+                output.write(decompress)
+                output.write(bytes(divider, "UTF-8"))		
+                output.close()
+                print("[+] Zlib decompressed buffer")
+                print(decompress)
+                b3 = decompress[0]
+                print("[+] Extracted Opcode")
+                print(hex(b3))
+                print("[+] Parsing Opcode")
+                OpcodeParse(hex(b3))
                  
-                else:
-                    print (pkt)
+            else:
+                print (pkt)
                 #self.sock.send(b'\xEA\xEE\xCC\xD3\xB8\xaa')
 		#output.write(pkt)  
-
+        
 serversocket.listen(5)
 print ('server started and listening')
 while 1:
