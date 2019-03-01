@@ -75,7 +75,7 @@ class client(Thread):
             output = open(filename, "a+b")   
             	
             if (pkt.find(b'\xEA\xEE\xCC\xD3\xB8') != -1):
-                print ("[+] Received Gh0stRAT variant")
+                print ("[+] Received Gh0stRAT variant communications")
 			
                 buf = list(pkt)
                     #print(buf)
