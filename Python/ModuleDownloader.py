@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 # coding: utf-8
 
-
-#Credit goes to @prsecurity_ for most of the code, I just added on the import list part
 # In[331]:
 
 from Crypto.Util.py3compat import *
@@ -111,7 +109,7 @@ args, leftovers = parser.parse_known_args()
 if args.ImpIP is not None:
   #Filename = input("Please enter path to IP list: ")
   with open(args.ImpIP) as f:
-    Data = f.readlines()
+      Data = f.readlines()
   Data = [x.strip() for x in Data]
 
 i = 0
@@ -145,35 +143,27 @@ for x in Data:
                          verify=False,
                          stream=True)
 
-  except requests.exceptions.ConnectionError:
-    i+=1
-    r.status_code = "Connection refused"
-
-  except requests.exceptions.Timeout:
-    i += 1
-    r.status_code = "Connection timeout"
-len(r.content)
+    #print(r.content)
+  
+    len(r.content)
 
 
 # In[388]:
 
 
-cipher_aes = AES.new(aes_key, AES.MODE_CBC, b"\x00"*16)
-decompressed_data = cipher_aes.decrypt(r.content[116:])
+    cipher_aes = AES.new(aes_key, AES.MODE_CBC, b"\x00"*16)
+    decompressed_data = cipher_aes.decrypt(r.content[116:])
 
-try:
-  struct.unpack("I", decompressed_data[:4])[0]
+ 
+    struct.unpack("I", decompressed_data[:4])[0]
 
-except struct.error:
-  print('struct error')
+
 # In[390]:
 
-try:
-  decompressed_data = zlib.decompress(decompressed_data[4:])
+ 
+    decompressed_data = zlib.decompress(decompressed_data[4:])
 
-except:
-  print('decompress error')
-  decompressed_data =b"\x00\x00\x00\x00" 
+
 
  
 
@@ -182,9 +172,9 @@ except:
 
 # Write down decompressed data just in case
 
-if decompressed_data != 0:
-  with open("trial2.dec.bin", "wb") as f:
-     f.write(decompressed_data)
+    if decompressed_data != 0:
+      with open("trial2.dec.bin", "wb") as f:
+         f.write(decompressed_data)
 
 
 
@@ -193,36 +183,58 @@ if decompressed_data != 0:
 
 # Because I am not sure of protobuf structure, we gonna extract modules dumb way
 # Get offsets to DOS header
-offsets = []
-for y in range(0, len(decompressed_data)):
-    if decompressed_data[y:y+5] == b"MZ\x90\x00\x03":
-        offsets.append(y)
-    offsets.append(len(decompressed_data))
+    offsets = []
+    for y in range(0, len(decompressed_data)):
+        if decompressed_data[y:y+5] == b"MZ\x90\x00\x03":
+            offsets.append(y)
+        offsets.append(len(decompressed_data))
 
 
 # In[393]:
 
 
-offsets
+    offsets
 
 
 # In[394]:
 
 
 # Function that will write data
-def write_module(start, end):
-    with open("emotet_module_{}_{}.dll".format(start, end), "wb") as f:
-        f.write(decompressed_data[start:end])
+    def write_module(start, end):
+        with open("emotet_module_{}_{}.dll".format(start, end), "wb") as f:
+            f.write(decompressed_data[start:end])
 
 
 # In[395]:
 
 
-for x in range(0, len(offsets)-1):
-    write_module(offsets[x], offsets[x+1])
+    for x in range(0, len(offsets)-1):
+        write_module(offsets[x], offsets[x+1])
 
 
 # In[ ]:
+
+
+  except requests.exceptions.ConnectionError:
+    i+=1
+    r.status_code = "Connection refused"
+
+  except requests.exceptions.Timeout:
+    i += 1
+    r.status_code = "Connection timeout"
+   # print(r.content)
+
+  except IndexError:
+    i = 0
+  except struct.error:
+    print('struct error')
+
+  except:
+    print('decompress error')
+    decompressed_data =b"\x00\x00\x00\x00"
+
+
+
 
 
 
