@@ -81,7 +81,7 @@ with open('outfile.txt', 'rb') as g: #Read Config Buffer
 	#print(c)
 	deIp = (c[0]) # Call String Decryption function on encrypted values
 	Port = bytearray(c[1])	
-	Portrev = Port.reverse()
+	#P#ortrev = Port.reverse()
 	#DA1 = decryptString(EA1)
 	#DA2 = decryptString(EA2)
 	SName = str(c[2])
